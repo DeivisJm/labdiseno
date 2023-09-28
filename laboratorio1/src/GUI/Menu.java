@@ -39,6 +39,8 @@ public class Menu extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblver = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +69,7 @@ public class Menu extends javax.swing.JFrame {
         jTextField3.setEditable(false);
         jTextField3.setText("Cantidad de Tickets ");
         jTextField3.setAutoscrolls(false);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 120, -1));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 540, -1, -1));
         jPanel1.add(jSpinnerasuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 50, -1));
 
         txtcantickets.setEditable(false);
@@ -82,15 +84,36 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Generador de Tickets");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
         jTextField6.setEditable(false);
         jTextField6.setText("Cantidad de Transacciones");
         jTextField6.setAutoscrolls(false);
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 160, -1));
 
+        tblver.setBackground(java.awt.SystemColor.control);
+        tblver.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Edad", "Condicion", "Cant. Transacciones", "Tiquete"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblver);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 470, 180));
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cataratajpg.jpg"))); // NOI18N
-        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 572));
+        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -118, -1, 690));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,7 +133,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btntiquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntiquetActionPerformed
         // TODO add your handling code here:
-        Validaciones.guardar(txtedad, cbxurg, jSpinnerasuntos, txtcantickets);
+        Codigo.guardar(txtedad, cbxurg, jSpinnerasuntos, txtcantickets, tblver);
+        
     }//GEN-LAST:event_btntiquetActionPerformed
 
 
@@ -120,11 +144,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerasuntos;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTable tblver;
     private javax.swing.JTextField txtcantickets;
     private javax.swing.JTextField txtedad;
     // End of variables declaration//GEN-END:variables
