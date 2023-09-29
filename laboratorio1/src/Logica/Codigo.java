@@ -1,7 +1,5 @@
 package Logica;
 
-import GUI.Cajas;
-import java.awt.Frame;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
@@ -19,10 +17,18 @@ public class Codigo {
 
     private String edad;
     private String urgencia;
+    private int asuntos;
+    private String tiquete;
+    private String caja;
+    private String tiempcaja;
 
     public Codigo(String edad, String urgencia, int asuntos) {
         this.edad = edad;
         this.urgencia = urgencia;
+        this.asuntos = asuntos;
+        this.caja = caja;
+        this.tiempcaja = tiempcaja;
+        this.tiquete = tiquete;
     }
 
     public static void guardar(JTextField Jtxtedad, JComboBox cbxurg, JSpinner jSpinnerasuntos, JTextField txtcantickets, JTable tblver) {
@@ -46,6 +52,7 @@ public class Codigo {
 
         // Llenar la tabla con la información
         llenarTabla(edad, urgencia, asuntos, tiquete, tblver);
+
         // Verificar si el contador de tickets llega a 15
         if (contadorPulsaciones == 15) {
             JOptionPane.showMessageDialog(null, "Se ha alcanzado el límite de 15 tickets, dirigase a cajas");
@@ -114,20 +121,37 @@ public class Codigo {
         }
         return modelito;
     }
-    public static void cargarTickets() {
-        // Obtener la referencia a la tabla tblcajas desde tu interfaz
-        Frame[] tblcajas = Cajas.getFrames(); // Reemplaza Cajas con el nombre de tu clase de interfaz
 
-        // Crear un objeto DefaultTableModel si aún no existe
-        DefaultTableModel modelito = new DefaultTableModel();
+    public static void llenarTablaTiquetes(JTable tblcajas) {
+        DefaultTableModel modelitoCajas = modelitoCajas(tblcajas);
 
-        // Limpiar la tabla antes de cargar los tickets
-        modelito.setRowCount(0);
+        // Verificar que hay tiquetes disponibles antes de llenar la tabla
+        if (listaValores.size() > 0) {
+            Random random = new Random();
 
-        // Llenar la tabla solo con los tiquetes
-        for (String tiquete : listaValores) {
-            modelito.addRow(new Object[]{tiquete});
+            for (String tiquete : listaValores) {
+                int tiempoTramite = random.nextInt(24) + 2; // Entre 2 y 25 minutos
+                int caja = random.nextInt(4) + 1; // Seleccionar aleatoriamente una caja de 1 a 4
+                modelitoCajas.addRow(new Object[]{tiquete, "Caja " + caja, tiempoTramite + " minutos"});
+            }
         }
+    }
+
+// Método para obtener el modelo de la tabla o crear uno nuevo
+    private static DefaultTableModel modelitoCajas(JTable tblcajas) {
+        DefaultTableModel modelitoCajas;
+        if (tblcajas.getModel() instanceof DefaultTableModel) {
+            modelitoCajas = (DefaultTableModel) tblcajas.getModel();
+        } else {
+            modelitoCajas = new DefaultTableModel();
+            tblcajas.setModel(modelitoCajas);
+
+            // Agregar las columnas a la tabla
+            modelitoCajas.addColumn("Tiquete");
+            modelitoCajas.addColumn("Caja");
+            modelitoCajas.addColumn("Tiempo en Caja");
+        }
+        return modelitoCajas;
     }
 
     /**
