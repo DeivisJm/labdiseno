@@ -1,5 +1,7 @@
 package Logica;
 
+import GUI.Cajas;
+import java.awt.Frame;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
@@ -17,12 +19,10 @@ public class Codigo {
 
     private String edad;
     private String urgencia;
-    private int asuntos;
 
     public Codigo(String edad, String urgencia, int asuntos) {
         this.edad = edad;
         this.urgencia = urgencia;
-        this.asuntos = asuntos;
     }
 
     public static void guardar(JTextField Jtxtedad, JComboBox cbxurg, JSpinner jSpinnerasuntos, JTextField txtcantickets, JTable tblver) {
@@ -46,6 +46,10 @@ public class Codigo {
 
         // Llenar la tabla con la información
         llenarTabla(edad, urgencia, asuntos, tiquete, tblver);
+        // Verificar si el contador de tickets llega a 15
+        if (contadorPulsaciones == 15) {
+            JOptionPane.showMessageDialog(null, "Se ha alcanzado el límite de 15 tickets, dirigase a cajas");
+        }
     }
 
     // Método para generar el tiquete
@@ -66,7 +70,7 @@ public class Codigo {
     // Método para determinar la prioridad del tiquete
     private static String determinarPrioridad(String edad, String urgencia, int asuntos) {
         // Verificar si es una persona adulta mayor
-        if (Integer.parseInt(edad) >= 60) {
+        if (Integer.parseInt(edad) >= 65) {
             return "A";
         }
 
@@ -87,14 +91,14 @@ public class Codigo {
     // Método para llenar la tabla con la información
     public static void llenarTabla(String edad, String urgencia, int asuntos, String tiquete, JTable tblver) {
         // Crear un objeto DefaultTableModel si aún no existe
-        DefaultTableModel modelito = getModel(tblver);
+        DefaultTableModel modelito = modelito(tblver);
 
         // Añadir una fila al modelo de la tabla con los datos
         modelito.addRow(new Object[]{edad, urgencia, asuntos, tiquete});
     }
 
     // Método para obtener el modelo de la tabla o crear uno nuevo
-    private static DefaultTableModel getModel(JTable tblver) {
+    private static DefaultTableModel modelito(JTable tblver) {
         DefaultTableModel modelito;
         if (tblver.getModel() instanceof DefaultTableModel) {
             modelito = (DefaultTableModel) tblver.getModel();
@@ -109,6 +113,21 @@ public class Codigo {
             modelito.addColumn("Tiquete");
         }
         return modelito;
+    }
+    public static void cargarTickets() {
+        // Obtener la referencia a la tabla tblcajas desde tu interfaz
+        Frame[] tblcajas = Cajas.getFrames(); // Reemplaza Cajas con el nombre de tu clase de interfaz
+
+        // Crear un objeto DefaultTableModel si aún no existe
+        DefaultTableModel modelito = new DefaultTableModel();
+
+        // Limpiar la tabla antes de cargar los tickets
+        modelito.setRowCount(0);
+
+        // Llenar la tabla solo con los tiquetes
+        for (String tiquete : listaValores) {
+            modelito.addRow(new Object[]{tiquete});
+        }
     }
 
     /**

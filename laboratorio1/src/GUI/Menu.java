@@ -29,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btncaja = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         cbxurg = new javax.swing.JComboBox<>();
         txtedad = new javax.swing.JTextField();
@@ -47,16 +48,24 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btncaja.setText("Ir a cajas");
+        btncaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncajaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btncaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+
         jTextField1.setEditable(false);
         jTextField1.setText("Condiciones Especiales");
         jTextField1.setAutoscrolls(false);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 160, -1));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 160, -1));
 
-        cbxurg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir...", "Embarazada", "Niño en brazos", "Ninguno de los anteriores" }));
-        jPanel1.add(cbxurg, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
+        cbxurg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Embarazada", "Niño en brazos", "Ninguno de los anteriores" }));
+        jPanel1.add(cbxurg, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
 
         txtedad.setAutoscrolls(false);
-        jPanel1.add(txtedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 50, -1));
+        jPanel1.add(txtedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 50, -1));
 
         btntiquet.setText("Generar Tiquete");
         btntiquet.addActionListener(new java.awt.event.ActionListener() {
@@ -64,32 +73,32 @@ public class Menu extends javax.swing.JFrame {
                 btntiquetActionPerformed(evt);
             }
         });
-        jPanel1.add(btntiquet, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        jPanel1.add(btntiquet, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
 
         jTextField3.setEditable(false);
         jTextField3.setText("Cantidad de Tickets ");
         jTextField3.setAutoscrolls(false);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 540, -1, -1));
-        jPanel1.add(jSpinnerasuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 50, -1));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, -1, -1));
+        jPanel1.add(jSpinnerasuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 50, -1));
 
         txtcantickets.setEditable(false);
         txtcantickets.setAutoscrolls(false);
-        jPanel1.add(txtcantickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 30, -1));
+        jPanel1.add(txtcantickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 470, 30, -1));
 
         jTextField5.setEditable(false);
         jTextField5.setText("Digite su edad");
         jTextField5.setAutoscrolls(false);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, -1));
+        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, -1));
 
-        jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 3, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Generador de Tickets");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
         jTextField6.setEditable(false);
         jTextField6.setText("Cantidad de Transacciones");
         jTextField6.setAutoscrolls(false);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 160, -1));
+        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 160, -1));
 
         tblver.setBackground(java.awt.SystemColor.control);
         tblver.setModel(new javax.swing.table.DefaultTableModel(
@@ -110,10 +119,10 @@ public class Menu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblver);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 470, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 470, 180));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cataratajpg.jpg"))); // NOI18N
-        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -118, -1, 690));
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piedra.jpg"))); // NOI18N
+        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -118, 1160, 710));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,8 +146,16 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btntiquetActionPerformed
 
+    private void btncajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncajaActionPerformed
+        // TODO add your handling code here:
+         Cajas c = new Cajas();
+        c.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btncajaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btncaja;
     private javax.swing.JButton btntiquet;
     private javax.swing.JComboBox<String> cbxurg;
     private javax.swing.JLabel fondo;
