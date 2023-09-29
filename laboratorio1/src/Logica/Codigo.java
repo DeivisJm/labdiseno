@@ -17,18 +17,11 @@ public class Codigo {
 
     private String edad;
     private String urgencia;
-    private int asuntos;
-    private String tiquete;
-    private String caja;
-    private String tiempcaja;
 
     public Codigo(String edad, String urgencia, int asuntos) {
         this.edad = edad;
         this.urgencia = urgencia;
-        this.asuntos = asuntos;
-        this.caja = caja;
-        this.tiempcaja = tiempcaja;
-        this.tiquete = tiquete;
+
     }
 
     public static void guardar(JTextField Jtxtedad, JComboBox cbxurg, JSpinner jSpinnerasuntos, JTextField txtcantickets, JTable tblver) {
@@ -152,6 +145,37 @@ public class Codigo {
             modelitoCajas.addColumn("Tiempo en Caja");
         }
         return modelitoCajas;
+    }
+
+    public static void mostrarResultado(JTable tblcajas, JTextArea txtResultado) {
+        DefaultTableModel modelitoCajas = (DefaultTableModel) tblcajas.getModel();
+        int totalClientesAtendidos = modelitoCajas.getRowCount();
+        int[] clientesAtendidosPorCaja = new int[4];
+        int tiempoTotalEspera = 0;
+
+        for (int i = 0; i < totalClientesAtendidos; i++) {
+            String cajaStr = modelitoCajas.getValueAt(i, 1).toString();
+            int caja = Integer.parseInt(cajaStr.substring(cajaStr.length() - 1)) - 1; // Obtener el número de caja
+
+            clientesAtendidosPorCaja[caja]++;
+            tiempoTotalEspera += Integer.parseInt(modelitoCajas.getValueAt(i, 2).toString().split(" ")[0]);
+        }
+
+        // Cantidad de clientes atendidos por caja cajero
+        StringBuilder resultado = new StringBuilder("Cantidad de clientes atendidos por caja cajero:\n");
+        for (int i = 0; i < clientesAtendidosPorCaja.length; i++) {
+            resultado.append("Caja ").append(i + 1).append(": ").append(clientesAtendidosPorCaja[i]).append(" clientes\n");
+        }
+
+        // Promedio de tiempo de espera por cajeros
+        double promedioTiempoEspera = (double) tiempoTotalEspera / totalClientesAtendidos;
+        resultado.append("\nPromedio de tiempo de espera por cajeros: ").append(promedioTiempoEspera).append(" minutos\n");
+
+        // Total de clientes que entraron en el banco
+        resultado.append("\nTotal de clientes que entraron en el banco: ").append(totalClientesAtendidos).append(" clientes");
+
+        // Mostrar el resultado en el JTextArea
+        txtResultado.setText(resultado.toString());
     }
 
     /**

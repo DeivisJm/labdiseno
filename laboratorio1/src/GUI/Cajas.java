@@ -2,8 +2,6 @@ package GUI;
 
 import Logica.Codigo;
 
-
-
 /**
  *
  * @author deivi
@@ -29,6 +27,9 @@ public class Cajas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblcajas = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resultado = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
@@ -54,7 +55,22 @@ public class Cajas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblcajas);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 570, 280));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 570, 160));
+
+        jButton2.setText("Ver Promedios");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
+
+        resultado.setEditable(false);
+        resultado.setColumns(20);
+        resultado.setRows(5);
+        jScrollPane2.setViewportView(resultado);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 380, 170));
 
         jButton1.setText("Cargar Tiquetes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,14 +104,21 @@ public class Cajas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Codigo.llenarTablaTiquetes(tblcajas);
-        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Codigo.mostrarResultado(tblcajas, resultado);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea resultado;
     private javax.swing.JTable tblcajas;
     // End of variables declaration//GEN-END:variables
 }
