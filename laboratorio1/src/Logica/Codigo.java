@@ -178,6 +178,57 @@ public class Codigo {
         txtResultado.setText(resultado.toString());
     }
 
+    public static void editar(JTable tblver, JTextField Jtxtedad, JComboBox cbxurg, JSpinner jSpinnerasuntos) {
+        // Obtener el índice de la fila seleccionada
+        int filaSeleccionada = tblver.getSelectedRow();
+
+        // Verificar si se seleccionó una fila válida
+        if (filaSeleccionada >= 0) {
+            // Obtener el modelo de la tabla
+            DefaultTableModel modelito = (DefaultTableModel) tblver.getModel();
+
+            // Obtener el valor de la columna que contiene el tiquete a editar
+            String tiqueteAEditar = modelito.getValueAt(filaSeleccionada, 3).toString();
+
+            // Obtener los valores actuales de la fila seleccionada
+            String edadActual = Jtxtedad.getText();
+            String urgenciaActual = cbxurg.getSelectedItem().toString();
+            int asuntosActual = Integer.parseInt(jSpinnerasuntos.getValue().toString());
+
+            // Actualizar los valores en la fila seleccionada del modelo de la tabla
+            modelito.setValueAt(edadActual, filaSeleccionada, 0);
+            modelito.setValueAt(urgenciaActual, filaSeleccionada, 1);
+            modelito.setValueAt(asuntosActual, filaSeleccionada, 2);
+
+            // Actualizar el tiquete correspondiente en el ArrayList
+            String nuevoTiquete = generarTiquete(edadActual, urgenciaActual, asuntosActual);
+            listaValores.set(listaValores.indexOf(tiqueteAEditar), nuevoTiquete);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila para editar.");
+        }
+    }
+
+    public static void eliminar(JTable tblver) {
+        int filaSeleccionada = tblver.getSelectedRow();
+
+        // Verificar si se seleccionó una fila válida
+        if (filaSeleccionada >= 0) {
+            // Obtener el modelo de la tabla
+            DefaultTableModel modelito = (DefaultTableModel) tblver.getModel();
+
+            // Obtener el valor de la columna que contiene el tiquete a eliminar
+            String tiqueteAEliminar = modelito.getValueAt(filaSeleccionada, 3).toString();
+
+            // Eliminar la fila seleccionada del modelo de la tabla
+            modelito.removeRow(filaSeleccionada);
+
+            // Eliminar el tiquete del ArrayList
+            listaValores.remove(tiqueteAEliminar);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar.");
+        }
+    }
+
     /**
      * @return the edad
      */
