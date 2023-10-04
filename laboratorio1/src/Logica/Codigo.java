@@ -168,7 +168,7 @@ public class Codigo {
         }
 
         // Promedio de tiempo de espera por cajeros
-        double promedioTiempoEspera = (double) tiempoTotalEspera / totalClientesAtendidos;
+        int promedioTiempoEspera = (int) tiempoTotalEspera / totalClientesAtendidos;
         resultado.append("\nPromedio de tiempo de espera por cajeros: ").append(promedioTiempoEspera).append(" minutos\n");
 
         // Total de clientes que entraron en el banco
